@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OFTALMO Medical Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:#f2f6fa;color:#132437;-webkit-font-smoothing:antialiased}
+    :root{--nav:#082f53;--nav2:#0b4f8a;--ink:#132437;--muted:#617488;--line:#dce6ef;--bg:#f2f6fa;--panel:#fff;--ok:#12825c;--ok-bg:#dff5ea;--warn:#a86d09;--warn-bg:#fff1d6;--bad:#b8324b;--bad-bg:#ffe1e7;--info:#0b4f8a;--info-bg:#e6f0f8}
+    a{text-decoration:none;color:inherit}
+    input,select,textarea,button{font-family:'Inter','Segoe UI',system-ui,sans-serif}
+    ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:#dce6ef;border-radius:3px}::-webkit-scrollbar-track{background:transparent}
+  </style>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="Layout.jsx"></script>
+<script type="text/babel" src="Dashboard.jsx"></script>
+<script type="text/babel" src="Citas.jsx"></script>
+<script type="text/babel" src="Pacientes.jsx"></script>
+<script type="text/babel" src="Clinico.jsx"></script>
+<script type="text/babel" src="Comercial.jsx"></script>
+<script type="text/babel" src="Almacen.jsx"></script>
+<script type="text/babel" src="Admin.jsx"></script>
+<script type="text/babel" src="Reportes.jsx"></script>
+<script type="text/babel">
+const { useState } = React;
+function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [module, setModule]     = useState('dashboard');
+  const [company, setCompany]   = useState('OFTALMO SAC');
+  const [branch, setBranch]     = useState('Sede Miraflores');
+  const [user]                  = useState({ name:'Admin Sistema', role:'Administrador' });
+  if (!loggedIn) return <LoginScreen onLogin={() => setLoggedIn(true)} />;
+  const ctx = { module, setModule, company, setCompany, branch, setBranch, user };
+  return (
+    <AppShell ctx={ctx}>
+      {module==='dashboard'      && <Dashboard />}
+      {module==='citas'          && <Citas />}
+      {module==='pacientes'      && <Pacientes />}
+      {module==='personal'       && <Personal />}
+      {module==='doctores'       && <Doctores />}
+      {module==='horarios'       && <Horarios />}
+      {module==='historias'      && <Historias />}
+      {module==='pos'            && <POS />}
+      {module==='caja'           && <Caja />}
+      {module==='pagos'          && <Pagos />}
+      {module==='comprobantes'   && <Comprobantes />}
+      {module==='facturacion'    && <Facturacion />}
+      {module==='inventario'     && <Inventario />}
+      {module==='transferencias' && <Transferencias />}
+      {module==='kardex'         && <Kardex />}
+      {module==='empresa'        && <Empresa />}
+      {module==='sedes'          && <Sedes />}
+      {module==='usuarios'       && <Usuarios />}
+      {module==='roles'          && <Roles />}
+      {module==='auditoria'      && <Auditoria />}
+      {module==='reportes'       && <Reportes />}
+    </AppShell>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
